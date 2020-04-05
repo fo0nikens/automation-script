@@ -17,12 +17,12 @@ function healthcheck() {
 }
 
 function usage() {
-  echo "please install psql, jq, and curl"
+  echo "please install docker, psql, jq, and curl"
   exit 1
 }
 
 # check requirements
-for libName in psql jq curl; do
+for libName in docker psql jq curl; do
   which $libName > $DEVNULL || usage
 done
 
@@ -55,8 +55,8 @@ echo $data
 
 # update record with the data
 PGPASSWORD=$PASSWORD psql -h $HOST -U $USER -d $DB << EOF
-update fruit set price = ${data} where name = 'apple';
-update fruit set price = ${data} where name = 'orange';
+  update fruit set price = ${data} where name = 'apple';
+  update fruit set price = ${data} where name = 'orange';
 EOF
 
 # select all records
