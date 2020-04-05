@@ -1,9 +1,10 @@
 #!/bin/bash
 
 readonly POSTGRES='test_postgres'
+readonly PASSWORD='password'
 
 function healthcheck() {
-  PGPASSWORD=password psql -h 0.0.0.0 -U postgres -c '\l' > /dev/null 2>&1 || return 1
+  PGPASSWORD=$PASSWORD psql -h 0.0.0.0 -U postgres -c '\l' > /dev/null 2>&1 || return 1
   return 0
 }
 
@@ -15,7 +16,7 @@ if [[ $exist = 1 ]]; then
 fi
 
 # startup postgres
-docker run -it -d -p 5432:5432 --name $POSTGRES -e POSTGRES_PASSWORD=password postgres:latest
+docker run -it -d -p 5432:5432 --name $POSTGRES -e POSTGRES_PASSWORD=$PASSWORD postgres:latest
 
 # wait for container running up
 while true; do
