@@ -49,17 +49,19 @@ PGPASSWORD=$PASSWORD psql -h $HOST -U $USER -d $DB << EOF
   insert into fruit (name, price) values ('apple', 100), ('orange', 200), ('lemon', 300);
 EOF
 
+# fetch data with HTTP Request
 data=$(curl -s $URL | jq '.data | .code')
 echo $data
 
+# update record with the data
 PGPASSWORD=$PASSWORD psql -h $HOST -U $USER -d $DB << EOF
 update fruit set price = ${data} where name = 'apple';
 update fruit set price = ${data} where name = 'orange';
 EOF
 
+# select all records
 for i in {1..3} ; do
 PGPASSWORD=$PASSWORD psql -h $HOST -U $USER -d $DB << EOF
 select name, price from fruit where id = ${i};
 EOF
 done
-
