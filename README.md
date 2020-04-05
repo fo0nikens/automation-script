@@ -1,5 +1,6 @@
 # Requirements
 - bash
+- docker
 - psql
 - jq
 - curl
