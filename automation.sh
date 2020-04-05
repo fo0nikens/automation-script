@@ -38,7 +38,7 @@ docker run -it -d -p $PORT:$PORT --name $NAME -e POSTGRES_PASSWORD=$PASSWORD pos
 
 # wait for container running up
 while true; do
-  sleep 0.1 &&  healthcheck || continue
+  sleep 0.1 && healthcheck || continue
   break
 done
 
@@ -57,6 +57,13 @@ EOF
 done
 
 # fetch data by HTTP Request
+# following response should be returned
+# {
+#   "success": 0,
+#   "data": {
+#     "code": 10000
+#   }
+# }
 data=$(curl -s $URL | jq '.data | .code')
 echo $data
 
