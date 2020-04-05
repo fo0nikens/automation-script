@@ -12,7 +12,7 @@ function healthcheck() {
 exist=$(docker ps -a | grep $POSTGRES | wc -l | sed 's/ //g')
 if [[ $exist = 1 ]]; then
   docker stop $POSTGRES && docker rm $POSTGRES
-  echo "container $POSTGRES removed"
+  echo "existing container $POSTGRES removed"
 fi
 
 # startup postgres
