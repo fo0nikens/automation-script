@@ -1,4 +1,5 @@
 # Requirements
+- bash
 - psql
 - jq
 - curl
