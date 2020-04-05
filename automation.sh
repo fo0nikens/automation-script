@@ -56,7 +56,7 @@ select name, price from fruit where id = ${i};
 EOF
 done
 
-# fetch data with HTTP Request
+# fetch data via HTTP Request
 data=$(curl -s $URL | jq '.data | .code')
 echo $data
 
